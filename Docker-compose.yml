@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - .:/src
+    depends_on:
+      - db
+    restart: on-failure
+    ports:
+      - "8000:80"
+    environment:
+      - ENV_STATE=staging
+      - PYTHONPATH=/src
+      - DATABASE_URL=postgresql://postgres:Bringt#1270@db:5432/dockert
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Bringt#1270
+      - POSTGRES_DB=dockert
+  redis:
+     image: redis:7
+     ports:
+        - "6379:6379"
+  worker:
+    build: .
+    command: celery -A app.worker.celery_app.celery worker --loglevel=info
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "./localstack_data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+
+volumes:
+  postgres_data:
