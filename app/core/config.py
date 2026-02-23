@@ -18,7 +18,7 @@ class EnvState(str, Enum):
 class GlobalSettings(BaseSettings):
     """Global configurations shared across all environments."""
     ENV_STATE: EnvState = EnvState.DEV
-    PROJECT_NAME: str = "CoGym eCommerce"
+    PROJECT_NAME: str = "DefaultAPI"
     SECRET_KEY: str = "your-super-secret-key-change-this-in-prod"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60

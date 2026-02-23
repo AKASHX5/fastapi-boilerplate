@@ -12,12 +12,12 @@ A high-performance, asynchronous FastAPI blueprint featuring RBAC, Celery worker
 
 ## 🛠 Local Setup (Mac/Linux)
 
-1. **Environment:**
    ```bash
-   python -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   cp .env.local .env
+Give the script execution permissions: chmod +x init_project.sh
+
+Run it: ./init_project.sh
+
+Enter your details.(Ensure Docker is installed)
    
 ```
 export PYTHONPATH=$PYTHONPATH:.
@@ -47,6 +47,10 @@ docker-compose exec web alembic upgrade head
 
 # Populate initial data (Admin user, S3 buckets, etc.)
 docker-compose exec web python -m app.db.seeders.base
+
+# removing the container
+docker-compose down --remove-orphans
+
 ```
 
 ```commandline
