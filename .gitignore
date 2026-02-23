@@ -1,0 +1,59 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# --- Environment & Secrets ---
+# Never commit your actual keys!
+.env
+.env.local
+.env.prod
+.env.docker
+.flaskenv
+
+# --- Docker & Databases ---
+# Ignore the actual data stored in your local containers
+localstack_data/
+pgdata/
+redis_data/
+*.db
+*.sqlite3
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- OS specific ---
+Thumbs.db
+db.db
+desktop.ini
+
+# --- Logs ---
+logs/
+*.log
+celerybeat-schedule
+celerybeat.pid
+
+# --- Project Specific ---
+# If you store local uploads outside of LocalStack
+static/uploads/
+venv/
