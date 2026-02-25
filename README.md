@@ -1,4 +1,4 @@
-# CoGym Production Backend
+# FastApi Boilerplate Production Backend
 
 A high-performance, asynchronous FastAPI blueprint featuring RBAC, Celery workers, and Nginx orchestration.
 

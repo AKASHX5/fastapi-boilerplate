@@ -88,4 +88,4 @@ def setup_logging():
 
 settings = get_settings()
 
-logger = logging.getLogger("cogym")
+logger = logging.getLogger("fastapi-boilerplate")

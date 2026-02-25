@@ -19,7 +19,7 @@ SECRET = "super-secret"
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version='1.0.0',
-    description="cogym",
+    description="fastapi-boilerplate",
     docs_url="/api/docs",
     redoc_url=None
 

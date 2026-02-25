@@ -3,7 +3,7 @@ import logging
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
-logger = logging.getLogger("cogym.middleware")
+logger = logging.getLogger("fastapi-boilerplate.middleware")
 
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
