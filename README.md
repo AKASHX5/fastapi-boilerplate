@@ -1,6 +1,20 @@
 # FastApi Boilerplate Production Backend
 
-A high-performance, asynchronous FastAPI blueprint featuring RBAC, Celery workers, and Nginx orchestration.
+A production-ready FastAPI backend boilerplate designed for real-world systems.
+Includes async architecture, RBAC-ready auth, background workers, and Docker-based infrastructure with clean project initialization.
+
+##Features
+- Fully async FastAPI architecture (Python 3.12)
+
+- PostgreSQL with Alembic migrations
+
+- Redis + Celery for background jobs
+
+- Docker Compose–based local orchestration
+
+- LocalStack for S3-compatible development
+
+- Makefile-driven developer workflow
 
 ## 🚀 Tech Stack
 - **FastAPI** (Python 3.12, Async/Await)
@@ -10,55 +24,28 @@ A high-performance, asynchronous FastAPI blueprint featuring RBAC, Celery worker
 - **Nginx** (Reverse Proxy)
 - **OpenAI SDK** (AI Intelligence)
 
-## 🛠 Local Setup (Mac/Linux)
+## 🛠 Quick Setup (Mac/Linux)
 
    ```bash
-Give the script execution permissions: chmod +x init_project.sh
-
-Run it: ./init_project.sh
-
-Enter your details.(Ensure Docker is installed)
-   
-```
-export PYTHONPATH=$PYTHONPATH:.
-python -m alembic upgrade head
-```
-
-### Common Commands
-
-#### Environment Setup
-```commandline
-# Create the tables
-docker-compose exec web alembic upgrade head
-
-# Populate initial data (Admin user, S3 buckets, etc.)
-docker-compose exec web python -m app.db.seeders.base
+git clone <repo-url>
+cd fastapi-boilerplate   
 ```
 
 #### Initialize Infra
 ```commandline
-docker-compose up -d --build
+make up        # Start all services
+make down      # Stop all services
+make reset     # Destroy containers, volumes, networks
+make ps        # List running containers
+make logs      # Follow logs
 ```
 
 #### Database Setup
 ```commandline
-# Create the tables
-docker-compose exec web alembic upgrade head
+make migrate        # Apply migrations
+make makemigration # Generate new migration
+make dbshell       # Open PostgreSQL shell
 
-# Populate initial data (Admin user, S3 buckets, etc.)
-docker-compose exec web python -m app.db.seeders.base
-
-# removing the container
-docker-compose down --remove-orphans
-
-```
-
-```commandline
-Start all services	docker-compose up -d
-Stop all services	docker-compose stop
-View all logs	docker-compose logs -f
-Check DB tables	docker-compose exec db psql -U postgres -d dockert -c "\dt"
-Generate Migration	docker-compose exec web alembic revision --autogenerate -m "msg"
 ```
 
 ### 📡 Running & Testing APIs
@@ -82,6 +69,6 @@ curl -X 'POST' \
 #### Admin 
 ```commandline
 creating admin user
-docker exec -it cogym_web_1 python -m app.cli admin@example.com pass123
+docker-compose exec web python -m app.cli admin@example.com pass123
 naviagte to http://localhost/admin
 ```

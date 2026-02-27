@@ -2,7 +2,6 @@ version: '3'
 
 services:
   web:
-    container_name: ${PROJECT_NAME}_web
     build:
       context: .
       args:
@@ -22,7 +21,6 @@ services:
       - DATABASE_URL=postgresql://postgres:Bringt#1270@db:5432/dockert
   db:
     image: postgres:15-alpine
-    container_name: ${PROJECT_NAME}_db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
@@ -33,11 +31,9 @@ services:
       - POSTGRES_DB=dockert
   redis:
      image: redis:7
-     container_name: ${PROJECT_NAME}_redis
      ports:
         - "6379:6379"
   worker:
-    container_name: ${PROJECT_NAME}_worker
     build: .
     command: celery -A app.worker.celery_app.celery worker --loglevel=info
     depends_on:
@@ -46,7 +42,6 @@ services:
       - REDIS_URL=redis://redis:6379/0
   localstack:
     image: localstack/localstack:latest
-    container_name: ${PROJECT_NAME}_localstack
     ports:
       - "4566:4566"
     environment:
